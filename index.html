@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script
+	src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+<link rel="stylesheet"
+	href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
+<script>
+
+ $(function() {
+           $('#kad').autocomplete({
+        	            source: <?= json_encode($array) ?>
+        	        	    })
+        	        }
+        );
+	 function sendForm(form){
+		     form.submit();
+		    }
+	function nodata(data){
+}
+
+</script>
+
+</head>
+<body>
+	<center>
+		<img src="./images/logo/io.png" alt="" />
+	</center>
+	<table>
+		<tbody>
+
+<?php
+if (isset($_POST['submit'])) {
+    $elem = $_POST;
+    foreach ($elem as $key => $value) {}
+    unset($elem['submit']);
+
+    $res = pg_update($dbconn, 'business.business_thessaloniki', $row, $elem);
+
+    if ($res) {
+        echo "<p style='font-size: 20px; font-family: Arial, Helvetica, sans-serif; color: green; padding-left: 150px; '>" . " Record completed \n" . "</p>";
+    } else {
+        echo "<p style='font-size: 20px; font-family: Arial, Helvetica, sans-serif; color: red; padding-left: 150px; '>" . "NO complete\n" . "</p>";
+    }
+}
+$ress = pg_query($sql);
+while ($row = pg_fetch_array($ress)) {
+    ?>
+
+			<form method="post">
+				<tr>
+
+					<td><input type="button" value="Go back!" onclick="history.back()"></td>
+					<td></td>
+				</tr>
+				<tr>
+
+					<td><label for="company_name">Company Name</label></td>
+					<td><input type="text" placeholder="Company Name"
+						required="required" id="company_name" name="company_name"
+						value="<?echo $row[0];?>"></td>
+				</tr>
+				<tr>
+					<td><label for="street">Street</label></td>
+					<td><input type="text" placeholder="Street name"
+						required="required" id="street" name="street"
+						onchange="sendForm(this.form)" value="<?echo $row[1];?>"></td>
+				</tr>
+
+				<tr>
+					<td><label for="bld_no">Building No</label></td>
+					<td><input type="text" placeholder="Number of building (XXX)"
+						name="bld_no" value="<?echo $row[2];?>"></td>
+				</tr>
+
+				<tr>
+					<td><label for="kad">KAD</label></td>
+					<td><input type="text" placeholder="Profesional sector" id="kad"
+						name="kad" onchange="sendForm(this.form)"
+						value="<?echo $row[5];?>"></td>
+				</tr>
+
+				<tr>
+					<td><label for="ID Block">Postcode</label></td>
+					<td><input type="text" placeholder="12345" name="postcode"
+						value="<?echo $row[3];?>"></td>
+				</tr>
+
+				<tr>
+					<td><label for="Levels">Phone</label></td>
+					<td><input type="text" placeholder="+30 123 456 7891" name="phone"
+						value="<?echo $row[6];?>"></td>
+				</tr>
+				<tr>
+
+
+				<tr>
+					<td><label for="fax">Fax</label></td>
+					<td><input type="text" placeholder="+30 123 456 7891" name="fax"
+						value="<?echo $row[7];?>"></td>
+				</tr>
+
+				<tr>
+					<td><label for="email">Email</label></td>
+					<td><input type="text" placeholder="+30 123 456 7891" name="email"
+						value="<?echo $row[8];?>"></td>
+				</tr>
+				<tr>
+
+
+				<tr>
+					<td><label for="web">WWW</label></td>
+					<td><input type="text" placeholder="+30 123 456 7891" name="web"
+						value="<?echo $row[9];?>"></td>
+				</tr>
+
+				<tr>
+					<td><label for="gps">GPS</label></td>
+					<td><input type="text" placeholder="1.12345678,1.12345678"
+						name="gps" value="<?echo $row[10];?>"></td>
+				</tr>
+				<tr>
+
+
+				<tr>
+					<td><label for="Director">Director Name</label></td>
+					<td><input type="text" placeholder="Nikolos Ivanidis"
+						name="director" value="<?echo $row[11];?>"></td>
+				</tr>
+
+				<tr>
+					<td><label for="Levels">Director phone</label></td>
+					<td><input type="text" placeholder="+30 231 047 6215"
+						name="dir_mobile" value="<?echo $row[12];?>"></td>
+				</tr>
+				<tr>
+					<td><label for="description">Director email</label></td>
+					<td><input type="text" placeholder="director@company.com"
+						name="dir_email" value="<?echo $row[13];?>"></td>
+				</tr>
+				<tr>
+					<td><label for="Levels">English</label></td>
+					<td><input type="text" placeholder="0-no,1-yes" name="english"
+						value="<?echo $row[14];?>"></td>
+				</tr>
+				<tr>
+					<td><label for="description">Russian</label></td>
+					<td><input type="text" placeholder="0-no,1-yes" name="russian"
+						value="<?echo $row[15];?>"></td>
+				</tr>
+				<tr>
+					<td><label for="Levels">A.F.M.</label></td>
+					<td><input type="text" placeholder="12345678" name="afm"
+						value="<?echo $row[16];?>"></td>
+				</tr>
+				<tr>
+					<td><label for="Levels">GE.M.I.</label></td>
+					<td><input type="text" placeholder="12345678912" name="gemi"
+						value="<?echo $row[17];?>"></td>
+				</tr>
+				<tr>
+					<td><label for="Levels">Comments</label></td>
+					<td><textarea rows="10" cols="45" placeholder="Comments"
+							name="comments"> <?echo $row[19];?> </textarea></td>
+				</tr>
+				<tr>
+					<td><label for="description">Description</label></td>
+					<td><input type="text" placeholder="Some where" name="description"
+						value="<?echo $row[18];?>"</td>
+				</tr>
+				<tr>
+					<td><input type="reset" name="reset" value="Clear It"></td>
+					<td><input type="submit" onClick="return nodata(this.form)"
+						name="submit" value="Submit"></td>
+				</tr>
+            <?php
+ }
+ ?>
+		</form>
+		</tbody>
+	</table>
+</body>
+</html>
